@@ -17,6 +17,20 @@ All item data lives in `src/data/items.json`. Add, remove, or re-price items
 there — no JSX changes needed. Category order and labels are in the
 `categories` array in the same file.
 
+## Items without photos (hidden for now)
+
+The catalog only shows rows where `photos[0]` is set (`OMIT_ITEMS_WITHOUT_FEATURED_PHOTO` in `src/App.jsx`). Items missing a featured photo stay in `items.json` but do not render until you turn that off.
+
+**To show no-photo items again (placeholder cards):** set `OMIT_ITEMS_WITHOUT_FEATURED_PHOTO` to `false` in `src/App.jsx`.
+
+**To restore the temporary “No photo” toolbar pill** (lists only items missing `photos[0]` across categories):
+
+1. Add `{ value: "noPhoto", label: "No photo (temp)" }` to the `FILTERS` array in `src/App.jsx`.
+2. In `visibleSections`, include `activeFilter === "noPhoto"` wherever `"all"` selects every category (`cats`).
+3. When building each category’s `catItems`, branch first on `activeFilter === "noPhoto"` (keep only `!itemHasFeaturedPhoto(i)`), otherwise apply `OMIT_ITEMS_WITHOUT_FEATURED_PHOTO` as today (`itemHasFeaturedPhoto(i)` only). That way the pill still works while the main catalog hides no-photo rows.
+
+Details also live in `.cursor/notes.md`.
+
 ## Build
 
 ```bash

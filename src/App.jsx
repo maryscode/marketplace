@@ -4,10 +4,6 @@ import data from "./data/items.json";
 
 const { items, categories } = data;
 
-const CONTACT = {
-  phone: "+19297770620",
-};
-
 const IMG_BASE =
   `${import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/"}img`;
 
@@ -15,6 +11,12 @@ function photoSrc(filename) {
   if (/^https?:\/\//i.test(filename)) return filename;
   return `${IMG_BASE}/${filename}`;
 }
+
+/**
+ * When true, items without photos[0] never appear in the grid (see README /
+ * .cursor/notes.md). Set false to show placeholder cards again.
+ */
+const OMIT_ITEMS_WITHOUT_FEATURED_PHOTO = true;
 
 const FILTERS = [
   { value: "all", label: "All" },
@@ -24,8 +26,6 @@ const FILTERS = [
   { value: "Kids", label: "Kids" },
   { value: "Decor", label: "Decor" },
   { value: "Outdoor", label: "Outdoor" },
-  { value: "free", label: "Free for you" },
-  { value: "noPhoto", label: "No photo (temp)" },
 ];
 
 /** Matches ItemCard: featured slot only when photos[0] is truthy */
@@ -53,7 +53,7 @@ function buildSmsBody(claimedItems) {
     (i, n) => `${n + 1}. ${i.name} (${priceText(i)})`
   );
   return [
-    "Hi Mary — I'm interested in these from your list:",
+    "Hi — I'm interested in these from your list:",
     "",
     ...lines,
     "",
@@ -62,39 +62,21 @@ function buildSmsBody(claimedItems) {
 }
 
 /**
- * Prefilled SMS bodies are inconsistent across OS/browser (wrong delimiter or "+" parsing often yields an empty body).
- * - iOS expects sms:&recipient&body=… (ampersand before body).
- * - Android expects sms:&recipient?body=… (standard query).
- * - Encode E.164 "+" as %2B so "+" is not treated as a space.
- * - iPadOS Safari often reports as Macintosh + touch — detect that as iOS-style SMS URLs.
+ * Prefilled SMS bodies are inconsistent across OS/browser.
+ * - iOS expects sms:&body=… (ampersand before body when there is no recipient).
+ * - Others use sms:?body=…
+ * - iPadOS Safari often reports as Macintosh + touch — treat as iOS-style.
  */
 function smsHrefForBody(plainBody) {
   const body = encodeURIComponent(plainBody);
-  const raw = CONTACT.phone?.trim();
-
   const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
   const platform = typeof navigator !== "undefined" ? navigator.platform : "";
   const touches = typeof navigator !== "undefined" ? (navigator.maxTouchPoints ?? 0) : 0;
-
   const isIOSStyleSms =
     /iPad|iPhone|iPod/i.test(ua) ||
     (platform === "MacIntel" && touches > 1); // iPadOS 13+ “desktop” UA
-  const isAndroid = /Android/i.test(ua);
 
-  const digits = raw?.replace(/\D/g, "") ?? "";
-  const recipient =
-    digits && raw?.startsWith("+")
-      ? encodeURIComponent(`+${digits}`)
-      : digits
-        ? encodeURIComponent(digits)
-        : "";
-
-  if (!recipient) {
-    return isIOSStyleSms ? `sms:&body=${body}` : `sms:?body=${body}`;
-  }
-
-  const glue = isIOSStyleSms && !isAndroid ? "&" : "?";
-  return `sms:${recipient}${glue}body=${body}`;
+  return isIOSStyleSms ? `sms:&body=${body}` : `sms:?body=${body}`;
 }
 
 export default function App() {
@@ -112,7 +94,7 @@ export default function App() {
 
   const visibleSections = useMemo(() => {
     const cats =
-      activeFilter === "all" || activeFilter === "free" || activeFilter === "noPhoto"
+      activeFilter === "all"
         ? categories
         : categories.filter((c) => c.key === activeFilter);
 
@@ -121,8 +103,9 @@ export default function App() {
         let catItems = items
           .map((item, id) => ({ ...item, id }))
           .filter((i) => i.cat === key);
-        if (activeFilter === "free") catItems = catItems.filter((i) => i.price === 0);
-        if (activeFilter === "noPhoto") catItems = catItems.filter((i) => !itemHasFeaturedPhoto(i));
+        if (OMIT_ITEMS_WITHOUT_FEATURED_PHOTO) {
+          catItems = catItems.filter((i) => itemHasFeaturedPhoto(i));
+        }
         return { key, label, items: catItems };
       })
       .filter((s) => s.items.length > 0);
@@ -202,7 +185,7 @@ function SendBar({ claimed, onClear }) {
           setCopied(true);
           window.setTimeout(() => setCopied(false), 2000);
         } catch {
-          window.alert("Could not copy — try Text Mary instead.");
+          window.alert("Could not copy — try Text list instead.");
         }
       });
   };
@@ -227,12 +210,12 @@ function SendBar({ claimed, onClear }) {
             {copied ? "Copied!" : "Copy list"}
           </button>
           <a className="send-btn send-btn-primary" href={sms}>
-            Text Mary List
+            Text list
           </a>
         </div>
         <p className="sendbar-hint">
           Nothing is held until you message me. Everything on your list goes in one text — copy and
-          paste, or use Text Mary.
+          paste, or use Text list.
         </p>
       </div>
     </div>
@@ -247,8 +230,7 @@ function Hero() {
       <p className="hero-body">
         Tap <strong>Add to my list</strong> on anything you want. When you’re ready, use{" "}
         <strong>Copy list</strong> and paste into your text to me — or tap{" "}
-        <strong>Text Mary</strong> to open Messages with the same list. One message with everything
-        is easiest for me.
+        <strong>Text list</strong> to open Messages with the same list. 
       </p>
     </div>
   );
