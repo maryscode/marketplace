@@ -453,6 +453,15 @@ a:hover { text-decoration: underline; }
 .sendbar-actions {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sendbar-hint {
+  flex: 1 1 100%;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--muted);
 }
 
 .send-btn {
@@ -477,6 +486,11 @@ a:hover { text-decoration: underline; }
 }
 
 .send-btn-secondary:hover { background: var(--border); }
+
+.send-btn-secondary.is-copied {
+  border-color: var(--text);
+  color: var(--text);
+}
 
 .send-btn-primary {
   background: var(--text);

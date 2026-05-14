@@ -5,7 +5,6 @@ import data from "./data/items.json";
 const { items, categories } = data;
 
 const CONTACT = {
-  email: "maryschan@gmail.com",
   phone: "+19297770620",
 };
 
@@ -25,7 +24,7 @@ const FILTERS = [
   { value: "Kids", label: "Kids" },
   { value: "Decor", label: "Decor" },
   { value: "Outdoor", label: "Outdoor" },
-  { value: "free", label: "Free only" },
+  { value: "free", label: "Free for you" },
   { value: "noPhoto", label: "No photo (temp)" },
 ];
 
@@ -37,26 +36,15 @@ function itemHasFeaturedPhoto(item) {
 
 function priceBadge(item) {
   if (item.reserved) return { text: "Reserved", cls: "badge-purple" };
-  if (item.price === 0) return { text: "Free", cls: "badge-teal" };
+  if (item.price === 0) return { text: "Free for you", cls: "badge-teal" };
   if (item.price == null) return { text: "TBD", cls: "badge-amber" };
   return { text: "$" + item.price, cls: "badge-green" };
 }
 
 function priceText(item) {
-  if (item.price === 0) return "Free";
+  if (item.price === 0) return "Free for you";
   if (item.price == null) return "TBD";
   return "$" + item.price;
-}
-
-function buildMessage(claimedItems) {
-  const lines = claimedItems.map((i) => `- ${i.name} (${priceText(i)})`);
-  return [
-    "Hi Mary! From your moving sale page, I'd like to claim:",
-    "",
-    ...lines,
-    "",
-    "Let me know when works for pickup. Thanks!",
-  ].join("\n");
 }
 
 /** Shorter, numbered list — best for SMS prefilled body */
@@ -65,7 +53,7 @@ function buildSmsBody(claimedItems) {
     (i, n) => `${n + 1}. ${i.name} (${priceText(i)})`
   );
   return [
-    "Hi Mary — from your list I want:",
+    "Hi Mary — I'm interested in these from your list:",
     "",
     ...lines,
     "",
@@ -73,17 +61,40 @@ function buildSmsBody(claimedItems) {
   ].join("\n");
 }
 
+/**
+ * Prefilled SMS bodies are inconsistent across OS/browser (wrong delimiter or "+" parsing often yields an empty body).
+ * - iOS expects sms:&recipient&body=… (ampersand before body).
+ * - Android expects sms:&recipient?body=… (standard query).
+ * - Encode E.164 "+" as %2B so "+" is not treated as a space.
+ * - iPadOS Safari often reports as Macintosh + touch — detect that as iOS-style SMS URLs.
+ */
 function smsHrefForBody(plainBody) {
-  const encoded = encodeURIComponent(plainBody);
-  const phone = CONTACT.phone?.trim();
+  const body = encodeURIComponent(plainBody);
+  const raw = CONTACT.phone?.trim();
 
-  if (typeof navigator !== "undefined" && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
-    if (phone) return `sms:${phone}&body=${encoded}`;
-    return `sms:&body=${encoded}`;
+  const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+  const platform = typeof navigator !== "undefined" ? navigator.platform : "";
+  const touches = typeof navigator !== "undefined" ? (navigator.maxTouchPoints ?? 0) : 0;
+
+  const isIOSStyleSms =
+    /iPad|iPhone|iPod/i.test(ua) ||
+    (platform === "MacIntel" && touches > 1); // iPadOS 13+ “desktop” UA
+  const isAndroid = /Android/i.test(ua);
+
+  const digits = raw?.replace(/\D/g, "") ?? "";
+  const recipient =
+    digits && raw?.startsWith("+")
+      ? encodeURIComponent(`+${digits}`)
+      : digits
+        ? encodeURIComponent(digits)
+        : "";
+
+  if (!recipient) {
+    return isIOSStyleSms ? `sms:&body=${body}` : `sms:?body=${body}`;
   }
 
-  if (phone) return `sms:${phone}?body=${encoded}`;
-  return `sms:?body=${encoded}`;
+  const glue = isIOSStyleSms && !isAndroid ? "&" : "?";
+  return `sms:${recipient}${glue}body=${body}`;
 }
 
 export default function App() {
@@ -145,7 +156,30 @@ export default function App() {
   );
 }
 
+function copyTextToClipboard(text) {
+  if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+    return navigator.clipboard.writeText(text);
+  }
+  return Promise.reject(new Error("no clipboard API"));
+}
+
+function fallbackCopyText(text) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+  } finally {
+    document.body.removeChild(ta);
+  }
+}
+
 function SendBar({ claimed, onClear }) {
+  const [copied, setCopied] = useState(false);
   const claimedItems = useMemo(
     () => [...claimed].map((id) => items[id]).filter(Boolean),
     [claimed]
@@ -153,30 +187,53 @@ function SendBar({ claimed, onClear }) {
 
   if (claimedItems.length === 0) return null;
 
-  const subject = encodeURIComponent("Moving sale — items I'd like to claim");
-  const emailBody = encodeURIComponent(buildMessage(claimedItems));
-  const mailto = `mailto:${CONTACT.email}?subject=${subject}&body=${emailBody}`;
-  const sms = smsHrefForBody(buildSmsBody(claimedItems));
+  const body = buildSmsBody(claimedItems);
+  const sms = smsHrefForBody(body);
+
+  const onCopyList = () => {
+    copyTextToClipboard(body)
+      .then(() => {
+        setCopied(true);
+        window.setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {
+        try {
+          fallbackCopyText(body);
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 2000);
+        } catch {
+          window.alert("Could not copy — try Text Mary instead.");
+        }
+      });
+  };
 
   return (
     <div className="sendbar">
       <div className="sendbar-inner">
         <div className="sendbar-summary">
           <span className="sendbar-count">
-            {claimedItems.length} item{claimedItems.length !== 1 ? "s" : ""} claimed
+            {claimedItems.length} item{claimedItems.length !== 1 ? "s" : ""} on your list
           </span>
-          <button className="sendbar-clear" onClick={onClear}>
-            Clear
+          <button type="button" className="sendbar-clear" onClick={onClear}>
+            Clear list
           </button>
         </div>
         <div className="sendbar-actions">
-          <a className="send-btn send-btn-secondary" href={sms}>
-            Text Mary list of items
-          </a>
-          <a className="send-btn send-btn-primary" href={mailto}>
-            Email Mary
+          <button
+            type="button"
+            className={`send-btn send-btn-secondary${copied ? " is-copied" : ""}`}
+            onClick={onCopyList}
+          >
+            {copied ? "Copied!" : "Copy list"}
+          </button>
+          <a className="send-btn send-btn-primary" href={sms}>
+            Text Mary List
           </a>
         </div>
+        <p className="sendbar-hint">
+          Nothing is held until you message me. Everything on your list goes in one text — copy and
+          paste, or use Text Mary.
+        </p>
       </div>
     </div>
   );
@@ -186,11 +243,12 @@ function Hero() {
   return (
     <div className="hero">
       <p className="hero-eyebrow">May 2026</p>
-      <h1>
-        Mary's Free Stuff
-      </h1>
+      <h1>Do you want any of this before I sell/donate?</h1>
       <p className="hero-body">
-        Do you guys want any of this stuff before I sell it?
+        Tap <strong>Add to my list</strong> on anything you want. When you’re ready, use{" "}
+        <strong>Copy list</strong> and paste into your text to me — or tap{" "}
+        <strong>Text Mary</strong> to open Messages with the same list. One message with everything
+        is easiest for me.
       </p>
     </div>
   );
@@ -269,10 +327,12 @@ function ItemCard({ item, isClaimed, onClaim }) {
       )}
       {!item.reserved && (
         <button
+          type="button"
           className={`claim-btn${isClaimed ? " active" : ""}`}
           onClick={onClaim}
+          aria-pressed={isClaimed}
         >
-          {isClaimed ? "✓ I want this!" : "I want this"}
+          {isClaimed ? "✓ On my list" : "Add to my list"}
         </button>
       )}
     </div>
