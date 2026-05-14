@@ -19,13 +19,14 @@ function photoSrc(filename) {
 const OMIT_ITEMS_WITHOUT_FEATURED_PHOTO = true;
 
 const FILTERS = [
-  { value: "all", label: "All" },
+  { value: "available", label: "All available" },
   { value: "Furniture", label: "Furniture" },
   { value: "Storage", label: "Storage" },
   { value: "Electronics", label: "Electronics" },
   { value: "Kids", label: "Kids" },
   { value: "Decor", label: "Decor" },
   { value: "Outdoor", label: "Outdoor" },
+  { value: "reserved", label: "Reserved" },
 ];
 
 /** Matches ItemCard: featured slot only when photos[0] is truthy */
@@ -80,7 +81,7 @@ function smsHrefForBody(plainBody) {
 }
 
 export default function App() {
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [activeFilter, setActiveFilter] = useState("available");
   const [claimed, setClaimed] = useState(() => new Set());
 
   const toggleClaim = (id) => {
@@ -93,8 +94,9 @@ export default function App() {
   };
 
   const visibleSections = useMemo(() => {
+    const reservedOnly = activeFilter === "reserved";
     const cats =
-      activeFilter === "all"
+      activeFilter === "available" || activeFilter === "reserved"
         ? categories
         : categories.filter((c) => c.key === activeFilter);
 
@@ -106,6 +108,8 @@ export default function App() {
         if (OMIT_ITEMS_WITHOUT_FEATURED_PHOTO) {
           catItems = catItems.filter((i) => itemHasFeaturedPhoto(i));
         }
+        if (reservedOnly) catItems = catItems.filter((i) => i.reserved);
+        else catItems = catItems.filter((i) => !i.reserved);
         return { key, label, items: catItems };
       })
       .filter((s) => s.items.length > 0);

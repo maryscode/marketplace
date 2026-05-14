@@ -26,7 +26,7 @@ The catalog only shows rows where `photos[0]` is set (`OMIT_ITEMS_WITHOUT_FEATUR
 **To restore the temporary “No photo” toolbar pill** (lists only items missing `photos[0]` across categories):
 
 1. Add `{ value: "noPhoto", label: "No photo (temp)" }` to the `FILTERS` array in `src/App.jsx`.
-2. In `visibleSections`, include `activeFilter === "noPhoto"` wherever `"all"` selects every category (`cats`).
+2. In `visibleSections`, include `activeFilter === "noPhoto"` wherever `"available"` or `"reserved"` selects every category (`cats`).
 3. When building each category’s `catItems`, branch first on `activeFilter === "noPhoto"` (keep only `!itemHasFeaturedPhoto(i)`), otherwise apply `OMIT_ITEMS_WITHOUT_FEATURED_PHOTO` as today (`itemHasFeaturedPhoto(i)` only). That way the pill still works while the main catalog hides no-photo rows.
 
 Details also live in `.cursor/notes.md`.
