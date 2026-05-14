@@ -317,6 +317,11 @@ function ItemCard({ item, isClaimed, onClaim }) {
           {isClaimed ? "✓ On my list" : "Add to my list"}
         </button>
       )}
+      {item.reserved && item.reserveMessage && (
+        <p className="reserved-msg" role="status">
+          {item.reserveMessage}
+        </p>
+      )}
     </div>
   );
 }

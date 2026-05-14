@@ -74,6 +74,7 @@
     { "name": "Twin mattress bedsheets + blankets", "cat": "Decor", "price": 0 },
     { "name": "Monitor Stand Riser, Solid Wood Desk", "cat": "Decor", "price": 0, "photos": ["monitor-stand-riser-solid-wood-under-storage.png", "monitor-stand-riser-solid-wood-dual-screens.png"] },
     { "name": "White monitor stand", "cat": "Decor", "price": 0, "link": "https://www.amazon.com/dp/B0BHYJXG5S", "photos": ["white-monitor-stand-bamboo-drawers-dell.png"] },
+    { "name": "Macally aluminum laptop stand", "cat": "Decor", "price": 0, "note": "Silver ergonomic riser; rubber grips on arms.", "photos": ["macally-aluminum-laptop-stand-desk.png"] },
     { "name": "Desk lamp", "cat": "Decor", "price": 0, "photos": ["black-swing-arm-desk-architect-lamp-close.png", "black-swing-arm-desk-architect-lamp-side.png"] },
     { "name": "White sculptural lamp", "cat": "Decor", "price": 0, "photos": ["white-sculptural-base-table-lamp-window-off.png", "white-sculptural-base-table-lamp-window-on.png"] },
     { "name": "Wooden lamp", "cat": "Decor", "price": 0, "photos": ["pink-fabric-table-lamp-wood-base-off.png", "pink-fabric-table-lamp-wood-base-on.png"] },
@@ -90,8 +91,8 @@
     { "name": "Bike", "cat": "Outdoor", "price": 0 },
     { "name": "Window fans × 3", "cat": "Outdoor", "price": 0, "photos": ["white-lasko-box-fan-carpet.png"] },
     { "name": "Space heater", "cat": "Outdoor", "price": 0 },
-    { "name": "Standing fan", "cat": "Outdoor", "price": 0, "photos": ["black-vornado-tower-fan-bedroom-full.png", "black-vornado-tower-fan-top-controls.png"] },
-    { "name": "Leaf blower", "cat": "Outdoor", "price": 0, "note": "EGO Power+ cordless; 615 CFM brushless; 56V ARC Lithium battery + charger included.", "photos": ["ego-leaf-blower-brushless-615-cfm.png", "ego-leaf-blower-power-plus-kit.png", "ego-56v-battery-on-charger.png", "ego-battery-charger-dock.png"] },
+    { "name": "Black tower fan", "cat": "Outdoor", "price": 0, "photos": ["black-vornado-tower-fan-bedroom-full.png", "black-vornado-tower-fan-top-controls.png"], "reserved": true, "reserveMessage": "Reserved — on hold for the standing fan." },
+    { "name": "Leaf blower", "cat": "Outdoor", "price": 0, "reserved": true, "note": "EGO Power+ cordless; 615 CFM brushless; 56V ARC Lithium battery + charger included.", "photos": ["ego-leaf-blower-brushless-615-cfm.png", "ego-leaf-blower-power-plus-kit.png", "ego-56v-battery-on-charger.png", "ego-battery-charger-dock.png"] },
     { "name": "Camping portable table", "cat": "Outdoor", "price": 0 },
     { "name": "Snowboard gear", "cat": "Outdoor", "price": 0 },
     { "name": "Pots for plants", "cat": "Outdoor", "price": 0, "photos": ["potted-plant-red-flowers-white-pot.jpg", "money-tree-plant-braided-trunk-ceramic-pot.jpg", "pothos-pink-ceramic-planter-white-surface-1.png", "pothos-pink-ceramic-planter-white-surface-2.png"] },
@@ -113,6 +114,6 @@
     { "name": "Kids art table + 2 chairs (whiteboard top)", "cat": "Kids", "price": 0, "photos": ["kids-art-table-with-2-chairs-1.jpg", "kids-art-table-with-2-chairs-2.jpg", "kids-art-table-whiteboard-top-overhead.jpg"] },
     { "name": "Makai soprano ukulele (pink stickers)", "cat": "Kids", "price": 0, "photos": ["makai-soprano-ukulele-pink-stickers.jpg"] },
     { "name": "Galaxy Penny skateboard", "cat": "Outdoor", "price": 0, "photos": ["galaxy-penny-skateboard-side-view-1.jpg", "galaxy-penny-skateboard-top-view-1.jpg", "galaxy-penny-skateboard-underside-trucks.jpg"] },
-    { "name": "Fire extinguisher", "cat": "Outdoor", "price": 0, "photos": ["kidde-fire-extinguisher.jpg"] }
+    { "name": "Fire extinguisher", "cat": "Outdoor", "price": 0, "reserved": true, "photos": ["kidde-fire-extinguisher.jpg"] }
   ]
 }

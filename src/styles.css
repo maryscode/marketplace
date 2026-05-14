@@ -379,6 +379,17 @@ a:hover { text-decoration: underline; }
 .claim-btn:hover { background: var(--surface2); color: var(--text); }
 .claim-btn.active { background: #1a6b3c; color: #ffffff; border-color: #1a6b3c; }
 
+.reserved-msg {
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface2);
+}
+
 .empty-state {
   text-align: center;
   padding: 3rem 1rem;
