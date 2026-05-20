@@ -18,6 +18,23 @@ function photoSrc(filename) {
  */
 const OMIT_ITEMS_WITHOUT_FEATURED_PHOTO = true;
 
+const LOCATION_LABELS = {
+  storage: "Storage",
+  resident: "Residence",
+};
+
+function locationLabel(item) {
+  const loc = item.location;
+  if (!loc) return null;
+  return LOCATION_LABELS[loc] ?? loc;
+}
+
+function locationBadgeClass(location) {
+  if (location === "storage") return "badge-gray";
+  if (location === "resident") return "badge-teal";
+  return "badge-gray";
+}
+
 const FILTERS = [
   { value: "available", label: "All available" },
   { value: "Furniture", label: "Furniture" },
@@ -50,9 +67,11 @@ function priceText(item) {
 
 /** Shorter, numbered list — best for SMS prefilled body */
 function buildSmsBody(claimedItems) {
-  const lines = claimedItems.map(
-    (i, n) => `${n + 1}. ${i.name} (${priceText(i)})`
-  );
+  const lines = claimedItems.map((i, n) => {
+    const loc = locationLabel(i);
+    const suffix = loc ? ` — ${loc}` : "";
+    return `${n + 1}. ${i.name} (${priceText(i)})${suffix}`;
+  });
   return [
     "Hi — I'm interested in these from your list:",
     "",
@@ -281,6 +300,7 @@ function Section({ label, items, claimed, onClaim }) {
 
 function ItemCard({ item, isClaimed, onClaim }) {
   const { text, cls } = priceBadge(item);
+  const loc = locationLabel(item);
   const photos = Array.isArray(item.photos) ? item.photos : [];
   const hasFeaturedPhoto = itemHasFeaturedPhoto(item);
   const classes = [
@@ -303,7 +323,12 @@ function ItemCard({ item, isClaimed, onClaim }) {
       )}
       <div className="item-top">
         <span className="item-name">{item.name}</span>
-        <span className={`badge ${cls}`}>{text}</span>
+        <div className="item-top-badges">
+          {loc && (
+            <span className={`badge ${locationBadgeClass(item.location)}`}>{loc}</span>
+          )}
+          <span className={`badge ${cls}`}>{text}</span>
+        </div>
       </div>
       {item.note && <p className="item-note">{item.note}</p>}
       {item.link && (

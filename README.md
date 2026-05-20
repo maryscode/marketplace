@@ -17,6 +17,10 @@ All item data lives in `src/data/items.json`. Add, remove, or re-price items
 there — no JSX changes needed. Category order and labels are in the
 `categories` array in the same file.
 
+Optional per item: `"location": "storage"` or `"location": "resident"` (shown on
+the card and included when someone copies or texts their list). Omit the field if
+pickup location does not matter for that item.
+
 ## Items without photos (hidden for now)
 
 The catalog only shows rows where `photos[0]` is set (`OMIT_ITEMS_WITHOUT_FEATURED_PHOTO` in `src/App.jsx`). Items missing a featured photo stay in `items.json` but do not render until you turn that off.
