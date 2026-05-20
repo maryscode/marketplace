@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import data from "./data/items.json";
 
@@ -17,6 +17,23 @@ function photoSrc(filename) {
  * .cursor/notes.md). Set false to show placeholder cards again.
  */
 const OMIT_ITEMS_WITHOUT_FEATURED_PHOTO = true;
+
+const LOCATION_LABELS = {
+  storage: "Storage",
+  resident: "Residence",
+};
+
+function locationLabel(item) {
+  const loc = item.location;
+  if (!loc) return null;
+  return LOCATION_LABELS[loc] ?? loc;
+}
+
+function locationBadgeClass(location) {
+  if (location === "storage") return "badge-gray";
+  if (location === "resident") return "badge-teal";
+  return "badge-gray";
+}
 
 const FILTERS = [
   { value: "available", label: "All available" },
@@ -37,22 +54,24 @@ function itemHasFeaturedPhoto(item) {
 
 function priceBadge(item) {
   if (item.reserved) return { text: "Reserved", cls: "badge-purple" };
-  if (item.price === 0) return { text: "Free for you", cls: "badge-teal" };
   if (item.price == null) return { text: "TBD", cls: "badge-amber" };
+  if (item.price === 0) return { text: "Free", cls: "badge-green" };
   return { text: "$" + item.price, cls: "badge-green" };
 }
 
 function priceText(item) {
-  if (item.price === 0) return "Free for you";
   if (item.price == null) return "TBD";
+  if (item.price === 0) return "Free";
   return "$" + item.price;
 }
 
 /** Shorter, numbered list — best for SMS prefilled body */
 function buildSmsBody(claimedItems) {
-  const lines = claimedItems.map(
-    (i, n) => `${n + 1}. ${i.name} (${priceText(i)})`
-  );
+  const lines = claimedItems.map((i, n) => {
+    const loc = locationLabel(i);
+    const suffix = loc ? ` — ${loc}` : "";
+    return `${n + 1}. ${i.name} (${priceText(i)})${suffix}`;
+  });
   return [
     "Hi — I'm interested in these from your list:",
     "",
@@ -229,8 +248,8 @@ function SendBar({ claimed, onClear }) {
 function Hero() {
   return (
     <div className="hero">
-      <p className="hero-eyebrow">May 2026</p>
-      <h1>Do you want any of this before I sell/donate?</h1>
+      <p className="hero-eyebrow">Summer 2026</p>
+      <h1>Moving furniture sale</h1>
       <p className="hero-body">
         Tap <strong>Add to my list</strong> on anything you want. When you’re ready, use{" "}
         <strong>Copy list</strong> and paste into your text to me — or tap{" "}
@@ -281,6 +300,7 @@ function Section({ label, items, claimed, onClaim }) {
 
 function ItemCard({ item, isClaimed, onClaim }) {
   const { text, cls } = priceBadge(item);
+  const loc = locationLabel(item);
   const photos = Array.isArray(item.photos) ? item.photos : [];
   const hasFeaturedPhoto = itemHasFeaturedPhoto(item);
   const classes = [
@@ -303,7 +323,12 @@ function ItemCard({ item, isClaimed, onClaim }) {
       )}
       <div className="item-top">
         <span className="item-name">{item.name}</span>
-        <span className={`badge ${cls}`}>{text}</span>
+        <div className="item-top-badges">
+          {loc && (
+            <span className={`badge ${locationBadgeClass(item.location)}`}>{loc}</span>
+          )}
+          <span className={`badge ${cls}`}>{text}</span>
+        </div>
       </div>
       {item.note && <p className="item-note">{item.note}</p>}
       {item.link && (
@@ -327,6 +352,62 @@ function ItemCard({ item, isClaimed, onClaim }) {
         </p>
       )}
     </div>
+  );
+}
+
+function LazyImage({ src, alt, variant = "main", className = "" }) {
+  const imgRef = useRef(null);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setLoaded(false);
+    setError(false);
+    const img = imgRef.current;
+    if (img?.complete && img.naturalWidth > 0) {
+      setLoaded(true);
+    }
+  }, [src]);
+
+  const wrapClass = [
+    "lazy-image",
+    `lazy-image--${variant}`,
+    loaded && "is-loaded",
+    error && "is-error",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <span className={wrapClass} aria-busy={!loaded && !error}>
+      {!loaded && !error && (
+        <span className="lazy-image-placeholder" aria-hidden="true">
+          <span className="lazy-image-spinner" />
+        </span>
+      )}
+      {error && (
+        <span className="lazy-image-placeholder lazy-image-error" aria-hidden="true">
+          Failed to load
+        </span>
+      )}
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        loading={variant === "lightbox" ? "eager" : "lazy"}
+        decoding="async"
+        className={
+          variant === "main"
+            ? "item-photo-img"
+            : variant === "lightbox"
+              ? "lightbox-img"
+              : undefined
+        }
+        onLoad={() => setLoaded(true)}
+        onError={() => setError(true)}
+      />
+    </span>
   );
 }
 
@@ -403,7 +484,7 @@ function ImageLightbox({ photos, index, caption, onClose, setActiveIndex }) {
             </button>
           </>
         )}
-        <img src={src} alt={alt} className="lightbox-img" />
+        <LazyImage src={src} alt={alt} variant="lightbox" />
         <div className="lightbox-footer">
           {caption ? <p className="lightbox-caption">{caption}</p> : null}
           {photos.length > 1 ? (
@@ -434,12 +515,10 @@ function ItemPhotos({ photos, caption }) {
             caption ? `View enlarged: ${caption}` : "View enlarged photo"
           }
         >
-          <img
+          <LazyImage
             src={photoSrc(photos[safe])}
             alt={caption ? `${caption} — photo ${safe + 1}` : `Photo ${safe + 1}`}
-            loading="lazy"
-            decoding="async"
-            className="item-photo-img"
+            variant="main"
           />
           <span className="item-photo-enlarge-hint" aria-hidden="true">
             Enlarge
@@ -457,7 +536,7 @@ function ItemPhotos({ photos, caption }) {
               aria-label={`Photo ${i + 1}`}
               aria-pressed={i === safe}
             >
-              <img src={photoSrc(file)} alt="" loading="lazy" decoding="async" />
+              <LazyImage src={photoSrc(file)} alt="" variant="thumb" />
             </button>
           ))}
         </div>
@@ -478,7 +557,6 @@ function ItemPhotos({ photos, caption }) {
 function Footer() {
   return (
     <div className="footer">
-      <p>TV is not available — promised to Melissa. Chabudai is being kept.</p>
       <p>Last updated May 2026.</p>
     </div>
   );
