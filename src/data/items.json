@@ -116,8 +116,8 @@
       "name": "Queen Bedframe",
       "cat": "Furniture",
       "location": "resident",
-      "price": 45,
-      "reserved": true,
+      "price": 50,
+      "reserved": false,
       "note": "Queen metal platform frame (black). Mattress area ~80\"L × 60\"W; frame ~14\"H; no headboard per listing.",
       "link": "https://www.amazon.com/dp/B08XYRFL77",
       "photos": [
@@ -161,11 +161,13 @@
       "cat": "Furniture",
       "location": "resident",
       "price": 500,
-      "reserved": true,
+      "reserved": false,
+      "note": "Conant Ball Furniture Makers (est. 1852) — manufacturer's mark stamped inside the drawer (see photo). Mid-century wood nightstand with one drawer; worn top.",
       "photos": [
         "mid-century-wood-nightstand-drawer-eero-cables.png",
         "mid-century-wood-nightstand-worn-top.png",
-        "mid-century-wood-nightstand-drawer-open-room.png"
+        "mid-century-wood-nightstand-drawer-open-room.png",
+        "mid-century-wood-nightstand-conant-ball-drawer-mark.png"
       ]
     },
     {
@@ -235,8 +237,8 @@
       "note": "World Market Zarek upholstered chair in moss/olive green. Brass ball casters; still in protective wrap.",
       "link": "https://www.worldmarket.com/p/zarek-mid-century-upholstered-office-chair-78659.html",
       "photos": [
-        "zarek-green-mid-century-office-chair.jpg",
-        "zarek-green-mid-century-office-chair-product.png"
+        "zarek-green-mid-century-office-chair-product.png",
+        "zarek-green-mid-century-office-chair.jpg"
       ]
     },
     {
@@ -526,7 +528,7 @@
       "cat": "Electronics",
       "location": "resident",
       "price": 20,
-      "note": "Priced for 1. Dell, ViewSonic, and other brands — basic panels. P2719H called out on-screen in first photo.",
+      "note": "Dell, ViewSonic, and other brands — basic panels. P2719H called out on-screen in first photo. (Priced for 1). ",
       "photos": [
         "dell-p2719h-monitor-osd-panel.png",
         "dell-monitor-front-powered-off.png"
@@ -1010,11 +1012,11 @@
       ]
     },
     {
-      "name": "Faux plants (various)",
+      "name": "Faux plants (various) and decorative objects",
       "cat": "Decor",
       "location": "resident",
       "price": null,
-      "note": "Various — hanging fern, air plants, succulent stems, potted greens, hanging planters. $1–$5 each.",
+      "note": "Various — hanging fern, air plants, succulent stems, potted greens, hanging planters, decorative candles. $1–$5 each.",
       "photos": [
         "faux-plants-candles-decor-assorted.jpg"
       ]

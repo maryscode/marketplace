@@ -68,9 +68,7 @@ function priceText(item) {
 /** Shorter, numbered list — best for SMS prefilled body */
 function buildSmsBody(claimedItems) {
   const lines = claimedItems.map((i, n) => {
-    const loc = locationLabel(i);
-    const suffix = loc ? ` — ${loc}` : "";
-    return `${n + 1}. ${i.name} (${priceText(i)})${suffix}`;
+    return `${n + 1}. ${i.name} (${priceText(i)})`;
   });
   return [
     "Hi — I'm interested in these from your list:",
@@ -135,7 +133,7 @@ export default function App() {
   }, [activeFilter]);
 
   return (
-    <div className="page">
+    <div className="page" id="top">
       <Hero />
 
       <Toolbar activeFilter={activeFilter} onFilter={setActiveFilter} />
@@ -158,7 +156,37 @@ export default function App() {
 
       <Footer />
       <SendBar claimed={claimed} onClear={() => setClaimed(new Set())} />
+      <BackToTop sendBarVisible={claimed.size > 0} />
     </div>
+  );
+}
+
+function BackToTop({ sendBarVisible }) {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 320);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (!visible) return null;
+
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <a
+      href="#top"
+      className={`back-to-top${sendBarVisible ? " back-to-top--above-sendbar" : ""}`}
+      onClick={scrollToTop}
+      aria-label="Back to top"
+    >
+      Back to top
+    </a>
   );
 }
 
@@ -252,8 +280,7 @@ function Hero() {
       <h1>Moving furniture sale</h1>
       <p className="hero-body">
         Tap <strong>Add to my list</strong> on anything you want. When you’re ready, use{" "}
-        <strong>Copy list</strong> and paste into your text to me — or tap{" "}
-        <strong>Text list</strong> to open Messages with the same list. 
+        <strong>Copy list</strong> and paste into your text to me. 
       </p>
     </div>
   );
@@ -324,9 +351,9 @@ function ItemCard({ item, isClaimed, onClaim }) {
       <div className="item-top">
         <span className="item-name">{item.name}</span>
         <div className="item-top-badges">
-          {loc && (
+          {/* {loc && (
             <span className={`badge ${locationBadgeClass(item.location)}`}>{loc}</span>
-          )}
+          )} */}
           <span className={`badge ${cls}`}>{text}</span>
         </div>
       </div>
@@ -554,10 +581,16 @@ function ItemPhotos({ photos, caption }) {
   );
 }
 
+const lastUpdatedLabel = new Date(__LAST_UPDATED__).toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+
 function Footer() {
   return (
     <div className="footer">
-      <p>Last updated May 2026.</p>
+      <p>Last updated {lastUpdatedLabel}.</p>
     </div>
   );
 }
