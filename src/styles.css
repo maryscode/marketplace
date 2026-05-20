@@ -613,6 +613,47 @@ a:hover { text-decoration: underline; }
 
 .page { padding-bottom: 7rem; }
 
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  z-index: 55;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+}
+
+.back-to-top:hover {
+  text-decoration: none;
+  background: var(--surface2);
+  border-color: var(--hint);
+}
+
+.back-to-top--above-sendbar {
+  bottom: calc(7.5rem + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 500px) {
+  .back-to-top {
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .back-to-top--above-sendbar {
+    bottom: calc(8.5rem + env(safe-area-inset-bottom));
+  }
+}
+
 /* Image lightbox (above .sendbar z-index 50) */
 .lightbox-backdrop {
   position: fixed;
