@@ -279,7 +279,7 @@ function Hero() {
       <p className="hero-eyebrow">Summer 2026</p>
       <h1>Moving furniture sale</h1>
       <p className="hero-body">
-        Tap <strong>Add to my list</strong> on anything you want. When you’re ready, use{" "}
+        Tap <strong>Add to my list</strong> on anything you want to request. When you’re ready, use{" "}
         <strong>Copy list</strong> and paste into your text to me. 
       </p>
     </div>
