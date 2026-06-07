@@ -1,6 +1,10 @@
 {
   "categories": [
     {
+      "key": "Crafts",
+      "label": "Crafts"
+    },
+    {
       "key": "Furniture",
       "label": "Furniture"
     },
@@ -23,6 +27,10 @@
     {
       "key": "Outdoor",
       "label": "Outdoor & misc"
+    },
+    {
+      "key": "Sold",
+      "label": "Sold"
     }
   ],
   "items": [
@@ -53,21 +61,29 @@
     },
     {
       "name": "Sideboard cabinet (58\")",
-      "cat": "Furniture",
+      "cat": "Sold",
       "location": "storage",
       "price": 175,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "1–3pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "note": "Wayfair Alcott Hill. 4 doors, adjustable shelves.",
       "link": "https://www.wayfair.com/furniture/pdp/alcott-hill-collynns-58-w-sideboard-cabinet-with-adjustable-shelves-and-4-doors-w110764647.html",
       "photos": [
         "sage-green-painted-sideboard-buffet-brass-hardware.jpg",
         "sideboard-58-teal-green-open-storage.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Orange chairs with white covers (set)",
-      "cat": "Furniture",
+      "cat": "Sold",
       "location": "resident",
       "price": 20,
+      "sold": true,
       "note": "Includes removable white chair covers. $10/each.",
       "photos": [
         "dining-chairs-white-shell-textured-pair-room.jpg",
@@ -77,9 +93,15 @@
     },
     {
       "name": "Sleeper Couch",
-      "cat": "Furniture",
+      "cat": "Sold",
       "location": "storage",
       "price": 250,
+      "pickupClaim": {
+        "date": "2026-05-31",
+        "time": "1:30pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "note": "IKEA FRIHETEN sleeper sectional, 3-seat with chaise storage, Skiftebo dark gray. Large — needs truck.",
       "link": "https://www.ikea.com/us/en/p/friheten-sleeper-sectional-3-seat-w-storage-skiftebo-dark-gray-s69216757/",
       "photos": [
@@ -87,7 +109,8 @@
         "grey-charcoal-sectional-sofa-overhead.jpg",
         "ikea-friheten-chaise-storage-open.jpg",
         "ikea-friheten-sleeper-pull-out-bed.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Extendable dining table",
@@ -117,23 +140,32 @@
       "cat": "Furniture",
       "location": "resident",
       "price": 50,
-      "reserved": false,
       "note": "Queen metal platform frame (black). Mattress area ~80\"L × 60\"W; frame ~14\"H; no headboard per listing.",
       "link": "https://www.amazon.com/dp/B08XYRFL77",
       "photos": [
+        "queen-metal-platform-bed-frame-in-room-slats.png",
+        "queen-metal-platform-bed-frame-in-room-corner.png",
         "queen-metal-platform-bed-frame-black-studio.jpg",
         "queen-metal-platform-bed-frame-dimensions.png"
       ]
     },
     {
       "name": "IKEA HEMNES dresser (8 drawers)",
-      "cat": "Furniture",
+      "cat": "Sold",
       "location": "storage",
       "price": 50,
-      "note": "Grey-brown stain.",
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "1pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
+      "note": "Grey-brown stain. Used — minor scuffs on lower drawers (see first photo).",
       "photos": [
+        "ikea-hemnes-8-drawer-dresser-grey-stain-home.png",
         "ikea-hemnes-8-drawer-dresser-grey-stain-showroom.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Round ottoman with storage",
@@ -161,18 +193,16 @@
       "cat": "Furniture",
       "location": "resident",
       "price": 400,
-      "reserved": false,
       "note": "Conant Ball Furniture Makers (est. 1852) — manufacturer's mark stamped inside the drawer (see photo). Mid-century wood nightstand with one drawer; worn top.",
       "photos": [
-        "mid-century-wood-nightstand-drawer-eero-cables.png",
-        "mid-century-wood-nightstand-worn-top.png",
         "mid-century-wood-nightstand-drawer-open-room.png",
-        "mid-century-wood-nightstand-conant-ball-drawer-mark.png"
+        "mid-century-wood-nightstand-conant-ball-drawer-mark.png",
+        "mid-century-wood-nightstand-worn-top.png"
       ]
     },
     {
       "name": "IKEA STOCKHOLM TV bench (walnut veneer)",
-      "cat": "Furniture",
+      "cat": "Sold",
       "location": "storage",
       "price": 100,
       "note": "Article 903.535.68. 160×40×50 cm (W×D×H). Max 50 kg on top, 20 kg per shelf. Fits up to ~63\" TV per IKEA. Walnut veneer, solid ash legs; 3 flip-up doors, adjustable shelves and feet, cable cutouts.",
@@ -180,14 +210,17 @@
       "photos": [
         "ikea-stockholm-tv-bench-room-feature-live.jpg",
         "ikea-stockholm-tv-bench-room-corner-detail.jpg",
-        "ikea-stockholm-tv-bench-room-wide-wall.jpg"
-      ]
+        "ikea-stockholm-tv-bench-room-wide-wall.jpg",
+        "ikea-stockholm-tv-bench-dimensions.png"
+      ],
+      "sold": true
     },
     {
       "name": "White height-adjustable desk (kid to adult)",
       "cat": "Furniture",
       "location": "resident",
       "price": 50,
+      "note": "White height-adjustable desk. Great for transitioning kids > teens > adults. Sides have a spot for storage/powerstrips. Fairly lightweight and easy to move around.",
       "photos": [
         "white-ikea-desk-with-clamp-lamp-room.png",
         "white-ikea-desk-door-background.png"
@@ -231,7 +264,7 @@
     },
     {
       "name": "Zarek mid-century office chair (green)",
-      "cat": "Furniture",
+      "cat": "Sold",
       "location": "storage",
       "price": 100,
       "note": "World Market Zarek upholstered chair in moss/olive green. Brass ball casters; still in protective wrap.",
@@ -239,14 +272,15 @@
       "photos": [
         "zarek-green-mid-century-office-chair-product.png",
         "zarek-green-mid-century-office-chair.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
-      "name": "Kid trundle bedframe",
+      "name": "Canopy bedframe with trundle",
       "cat": "Kids",
       "location": "resident",
       "price": 140,
-      "note": "Curtain/mosquito net if you want it. 2 mattresses not included",
+      "note": "Twin trundle bedframe. Great for hanging curtains, mobiles, playing house. Some scuffs (from child enjoying it!). Sheer curtain/ mosquito net included if you want it. 2 mattresses sold separately ($20 each). Recommended twin mattress height for trundle: about 5-7\". Currently fully assembled but can be disassembled for easier transport. Pickups only.",
       "photos": [
         "white-twin-house-bed-trundle-window.png",
         "white-twin-house-bed-trundle-pulled-out.png",
@@ -265,7 +299,7 @@
     },
     {
       "name": "Gold etagere bookcase (72\"H)",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "storage",
       "price": 50,
       "note": "Wayfair Steelside. 72.2\"H × 32.7\"W × 11.9\"D.",
@@ -274,13 +308,19 @@
         "gold-etagere-bookcase-72-product-studio.jpg",
         "gold-etagere-bookcase-72-styled-room.jpg",
         "gold-etagere-bookcase-72-dimensions.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "3-stack cube shelves (4 available)",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "resident",
       "price": 5,
+      "sold": true,
+      "pickupClaim": {
+        "date": "2026-05-27",
+        "time": "3pm"
+      },
       "note": "Price for 1. Target Brightroom. 35.9\"H × 12.2\"W × 11.7\"D each. White. Photo shows one 3-cube unit (you get four).",
       "link": "https://www.target.com/p/11-cube-book-shelf-white-brightroom/-/A-94948910?preselect=93209260",
       "photos": [
@@ -289,12 +329,18 @@
     },
     {
       "name": "Over-toilet shelf (RiverRidge Madison)",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "resident",
-      "price": 5,
+      "price": 10,
+      "sold": true,
+      "pickupClaim": {
+        "date": "2026-05-27",
+        "time": "7pm"
+      },
       "note": "A small portion of the bottom was cut to accommodate piping — floor clearance may differ from the dimension diagram.",
       "link": "https://www.wayfair.com/storage-organization/pdp/riverridge-home-madison-spacesaver-w002571929.html",
       "photos": [
+        "riverridge-madison-spacesaver-in-use-bathroom.png",
         "riverridge-madison-spacesaver-white-studio.png",
         "riverridge-madison-spacesaver-dimensions.png",
         "riverridge-madison-spacesaver-over-toilet.png"
@@ -302,25 +348,33 @@
     },
     {
       "name": "Wood/metal shelf",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "resident",
       "price": 40,
       "note": "Located in ADU.",
       "photos": [
         "wood-metal-4-tier-shelf-adu-room.png"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Standing shoe racks (2 available)",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "storage",
       "price": 10,
+      "pickupClaim": {
+        "date": "2026-05-31",
+        "time": "1pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "note": "(Priced for 1) Metal frame with angled shelves and grey wood top — both pictured. Narrow 4-tier metal, 12–16 pair each.",
       "link": "https://www.amazon.com/dp/B0BLN7HMF5",
       "photos": [
         "standing-metal-shoe-racks-pair-wood-top-empty.jpg",
         "standing-metal-shoe-racks-pair-with-shoes.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Coat rack (double rod garment rack)",
@@ -346,38 +400,53 @@
     },
     {
       "name": "Tall white IKEA BILLY bookcase",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "storage",
       "price": 20,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "1–3pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "link": "https://www.ikea.com/us/en/p/billy-bookcase-white-20522046/",
       "photos": [
         "ikea-billy-bookshelf-white-tall.png",
         "ikea-billy-bookcase-white-dimensions.png"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Small white bookshelf",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "storage",
       "price": 10,
+      "pickupClaim": {
+        "date": "2026-05-31",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "photos": [
         "small-white-3-tier-bookshelf-studio.png",
         "small-white-3-tier-bookshelf-dimensions.png"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "IKEA birch shelf w/ drawer",
       "cat": "Kids",
-      "location": "storage",
-      "price": 30,
+      "location": "resident",
+      "price": 40,
       "note": "Birch finish. Stock photo is a white unit for model reference only; color/finish is not accurate to ours.",
       "photos": [
+        "ikea-billy-type-shelf-drawer-actual.png",
+        "ikea-billy-type-shelf-drawer-dimensions.jpg",
         "ikea-billy-type-shelf-drawer-reference.png"
       ]
     },
     {
       "name": "IKEA JONAXEL shelving unit (white)",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "storage",
       "price": 5,
       "note": "3-tier powder-coated steel (≈10\" D × 20\" W × 27½\" H per IKEA). Second photo: in use.",
@@ -385,32 +454,47 @@
       "photos": [
         "ikea-jonaxel-shelving-unit-white-3-tier.png",
         "ikea-white-metal-shelf-in-use-sewing.png"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "IKEA ALEX drawer unit (white)",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "storage",
       "price": 40,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "1–3pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "note": "5 drawers; ~14⅛\" W × 22⅞\" D × 27½\" H per IKEA.",
       "link": "https://www.ikea.com/us/en/p/alex-drawer-unit-white-00473546/",
       "photos": [
         "ikea-alex-drawer-unit-white-5-drawer-studio.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "4-cube shelf",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "storage",
       "price": 5,
+      "pickupClaim": {
+        "date": "2026-05-31",
+        "time": "1pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "note": "Has scuffs. Photo is a clean stock reference (KALLAX-style 2×2), not the actual finish.",
       "photos": [
         "ikea-kallax-2x2-cube-shelf-white-reference.png"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "IKEA HYLLIS shelf unit (galvanized)",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "storage",
       "price": 5,
       "note": "Indoor/outdoor galvanized steel. Tall unit ~23⅝\" W × 10⅝\" D × 55⅛\" H per IKEA — anchor to wall.",
@@ -418,19 +502,223 @@
       "photos": [
         "ikea-hyllis-galvanized-shelf-unit-studio.jpg",
         "ikea-hyllis-galvanized-shelf-unit-dimensions.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Garage shelves",
+      "cat": "Sold",
+      "location": "storage",
+      "price": 10,
+      "pickupClaim": {
+        "date": "2026-05-31",
+        "time": "1:30pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
+      "note": "5-tier heavy-duty plastic shelving unit (~72\"H × 36\"W). Used; shown with items on shelves for scale — shelves will be empty at pickup.",
+      "photos": [
+        "garage-shelves-5-tier-plastic-storage-unit.png"
+      ],
+      "sold": true
+    },
+    {
+      "name": "Small wood side table (~18\"H)",
       "cat": "Storage",
       "location": "resident",
-      "price": 50
+      "price": 20,
+      "note": "Light hardwood end table with tapered legs and cross-brace base. ~18\" tall. Small scuff on top (see second photo).",
+      "photos": [
+        "light-wood-side-table-18in-full.png",
+        "light-wood-side-table-top-scuff.png"
+      ]
+    },
+    {
+      "name": "simplehuman rectangular step trash can (12 gal)",
+      "cat": "Sold",
+      "location": "storage",
+      "price": 40,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "1pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
+      "note": "12-gallon rectangular can with stainless steel lid — space-efficient shape. Steel foot pedal; lid shox for smooth, quiet close. Used; some scuffs/dust on body.",
+      "photos": [
+        "simplehuman-rectangular-step-trash-can-12gal.png"
+      ],
+      "sold": true
+    },
+    {
+      "name": "Adjustable-height student desk / workstation",
+      "cat": "Storage",
+      "location": "resident",
+      "price": 30,
+      "note": "Light wood-grain laminate top with black edge banding; black steel T-leg frame with height adjustment and leveling feet. Wrapped for storage. Good condition.",
+      "photos": [
+        "adjustable-student-desk-height-side.png",
+        "adjustable-student-desk-overhead-wrapped.png",
+        "adjustable-student-desk-angle-wrapped.png",
+        "adjustable-student-desk-topdown-wrapped.png"
+      ]
+    },
+    {
+      "name": "Round wood-framed wall mirror",
+      "cat": "Sold",
+      "location": "storage",
+      "price": 40,
+      "note": "Circular mirror with warm natural wood frame. 22\"H × 22\"W × 2.25\"D. Sawtooth hangers on back. Good condition.",
+      "photos": [
+        "round-mirror.jpg",
+        "round-wood-framed-wall-mirror-front.png",
+        "round-wood-framed-wall-mirror-back.png"
+      ],
+      "sold": true
+    },
+    {
+      "name": "Full-length mirror (tan frame)",
+      "cat": "Sold",
+      "location": "storage",
+      "price": 10,
+      "pickupClaim": {
+        "date": "2026-05-31",
+        "time": "1–3pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
+      "note": "Light tan frame with fine horizontal texture. Leans for display; can be wall-mounted.",
+      "photos": [
+        "full-length-mirrors-white-and-tan-pair-storage.png"
+      ],
+      "sold": true
+    },
+    {
+      "name": "Camping gear bundle (tent + 2 sleeping bags)",
+      "cat": "Storage",
+      "location": "resident",
+      "price": 75,
+      "note": "One price for the set. REI Passage 2 two-person 3-season tent (packed in carry bag; floor 90\"×54\", peak 42\", ~4 lb 14 oz min weight per label). Plus two sleeping bags in stuff sacks (navy and blue). Sold together only.",
+      "photos": [
+        "camping-gear-rei-tent-sleeping-bags-bin.png",
+        "rei-passage-2-tent-bag-label.png"
+      ]
+    },
+    {
+      "name": "REI Co-op Stowaway Low camp chair",
+      "cat": "Storage",
+      "location": "resident",
+      "price": 25,
+      "note": "Low-profile folding chair (lime/grey mesh). Includes lime green REI carry bag. Good used condition.",
+      "photos": [
+        "rei-stowaway-low-camp-chair-front.png",
+        "rei-stowaway-low-camp-chair-side.png",
+        "camping-chairs-carry-bags-pair.png"
+      ]
+    },
+    {
+      "name": "Cache Creek folding camp chair",
+      "cat": "Storage",
+      "location": "resident",
+      "price": 10,
+      "note": "Standard-height quad chair with cup holder (promotional Cache Creek / Indian Bingo & Casino). Includes dark green carry bag. Good used condition.",
+      "photos": [
+        "cache-creek-camp-chair-open.png",
+        "camping-chairs-carry-bags-pair.png"
+      ]
+    },
+    {
+      "name": "Staples 8-sheet cross-cut paper shredder",
+      "cat": "Storage",
+      "location": "resident",
+      "price": 20,
+      "note": "Personal cross-cut shredder — up to 8 sheets; credit card slot. Auto/reverse/off switch; bin with fill window. Used, dusty; test before relying on it.",
+      "photos": [
+        "staples-8-sheet-shredder-front.png",
+        "staples-8-sheet-shredder-top.png"
+      ]
+    },
+    {
+      "name": "Steel tongue drum (11 notes) + mallets & bag",
+      "cat": "Storage",
+      "location": "resident",
+      "price": 45,
+      "note": "White 11-tongue steel drum (~10\"), numbered notes. Includes two rubber-tip mallets and zippered carry bag. Excellent condition.",
+      "photos": [
+        "steel-tongue-drum-11-note-mallets-case.png"
+      ]
+    },
+    {
+      "name": "Small music instruments bundle",
+      "cat": "Storage",
+      "location": "resident",
+      "price": 30,
+      "note": "One price for the lot: small rope-tuned wooden djembe, pair of painted wooden maracas (wear on handles), white plastic recorder, small colorful toy flute, and brass finger cymbals. As shown in box.",
+      "photos": [
+        "small-music-instruments-bundle-box.png"
+      ]
+    },
+    {
+      "name": "B. toys wooden play kitchen",
+      "cat": "Sold",
+      "location": "storage",
+      "price": 0,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "1pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
+      "note": "Kids play kitchen with microwave, stovetop, sink, and oven (teal and wood). Used — some wear on sides. Accessories not guaranteed.",
+      "photos": [
+        "b-toys-play-kitchen-teal-front.png",
+        "b-toys-play-kitchen-countertop.png"
+      ],
+      "sold": true
+    },
+    {
+      "name": "Large planter pots (2)",
+      "cat": "Sold",
+      "location": "resident",
+      "price": 20,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "2:30pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
+      "note": "One price for both — empty, no plants. (1) Champagne/bronze metal-look cylinder (~15–20\") with matching tripod stand (stand packed inside; green wrap on legs). (2) Large woven basket-style planter with clear plastic liner. Some scuffs on the metal pot.",
+      "photos": [
+        "large-planter-metallic-cylinder.png",
+        "large-planter-metal-tripod-stand.png",
+        "large-planters-woven-basket-charcoal-pair.png"
+      ],
+      "sold": true
+    },
+    {
+      "name": "HP Deskjet 3520 printer/scanner + extra ink",
+      "cat": "Storage",
+      "location": "resident",
+      "price": 30,
+      "note": "HP Deskjet 3520 e-All-in-One (print, scan, copy). Includes power cord and box of GPC Image compatible ink cartridges. Discontinued model — used, dusty; verify it prints before relying on it.",
+      "photos": [
+        "hp-deskjet-3520-printer-with-ink.png",
+        "hp-deskjet-3520-label.png",
+        "hp-deskjet-3520-ink-cartridges-box.png"
+      ]
     },
     {
       "name": "Metal shoe rack (2 available)",
-      "cat": "Storage",
+      "cat": "Sold",
       "location": "resident",
       "price": 5,
+      "sold": true,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "2pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "photos": [
         "shoe-rack-2-tier-white-chrome-1.jpg",
         "shoe-rack-2-tier-white-chrome-2.jpg",
@@ -536,17 +824,18 @@
     },
     {
       "name": "TV",
-      "cat": "Electronics",
+      "cat": "Sold",
       "location": "resident",
       "price": null,
       "note": "Reserved — going back to Melissa.",
-      "reserved": true
+      "sold": true
     },
     {
       "name": "B. toys Mini Chef Kitchenette (20+ pcs)",
-      "cat": "Kids",
+      "cat": "Sold",
       "location": "resident",
       "price": 0,
+      "sold": true,
       "note": "Wooden play kitchen, 3+ years. Does not include all pieces; has lots of wear. May also come with lots of pretend play food. Photo is the retail model for reference, not the actual condition.",
       "link": "https://www.amazon.com/dp/B07YCT64TJ",
       "photos": [
@@ -578,11 +867,12 @@
     },
     {
       "name": "Nuna RAVA car seat",
-      "cat": "Kids",
+      "cat": "Sold",
       "location": "resident",
+      "sold": true,
       "note": "Infant insert not available.",
       "link": "https://nunababy.com/usa/rava-convertible-car-seat?srsltid=AfmBOop_RBeMVXtbILGTOv2f_p8VHeDEUmD4_CArumxhfmWFfc6nJly8&color_ref=16366",
-      "price": 100,
+      "price": 150,
       "photos": [
         "nuna-rava-car-seat-front.png",
         "nuna-rava-car-seat-front-alt.png",
@@ -601,8 +891,321 @@
       ]
     },
     {
-      "name": "Curtains (54\"×84\" white)",
+      "name": "Kids craft set (paint, tops & beads)",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "One price for the lot: multiple strips of acrylic-style paints (wide color range), bag of unpainted wooden spinning tops (~6–8), and clear bead organizer with assorted natural wood beads (round, oval, and geometric shapes). Paint-your-own + bead-crafting kit.",
+      "photos": [
+        "kids-craft-set-paint-tops-beads.png",
+        "kids-craft-set-paint-tops-beads-alt.png"
+      ]
+    },
+    {
+      "name": "Klutz Rainbow Daydream Soap kit",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Melt-and-pour soap kit with rainbow and crescent moon molds, clear soap base, floral transfers, and scent. Ages 6+.",
+      "photos": [
+        "klutz-rainbow-daydream-soap-front.png",
+        "klutz-rainbow-daydream-soap-back.png"
+      ]
+    },
+    {
+      "name": "Cra-Z-Loom rubber band bracelet kit",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Cra-Z-Art Cra-Z-Loom with finger loom, hook, ~7,000 latex-free bands, and S-clips. Ages 8+.",
+      "photos": [
+        "cra-z-loom-kit-front.png",
+        "cra-z-loom-kit-back.png"
+      ]
+    },
+    {
+      "name": "KraFun Easy Sew Puppy & Kitten kit",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Sew-your-own felt animals — makes 8 (4 dogs + 4 cats). Includes jumbo needle and fabric stickers. Ages 5–6+.",
+      "photos": [
+        "krafun-easy-sew-puppy-kitten-front.png",
+        "krafun-easy-sew-puppy-kitten-back.png"
+      ]
+    },
+    {
+      "name": "Klever Kits My First Sewing Kit",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "7 pre-cut felt sewing crafts with sequins, foam stickers, embroidery thread, and plastic needles. Ages 6+.",
+      "photos": [
+        "klever-kits-my-first-sewing-kit-front.png",
+        "klever-kits-my-first-sewing-kit-back.png"
+      ]
+    },
+    {
+      "name": "The #UpsideDownChallenge game",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Vango party game with upside-down goggles and 25 challenge cards. Ages 8+, 2–6 players.",
+      "photos": [
+        "upside-down-challenge-game-front.png",
+        "upside-down-challenge-game-back.png"
+      ]
+    },
+    {
+      "name": "Cra-Z-Art Craze Sensations mix-ins (2)",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Two sealed Craze Sensations containers with mix-ins (stars/beads and foam cubes).",
+      "photos": [
+        "craze-sensations-mix-ins-pair.png"
+      ]
+    },
+    {
+      "name": "Scented slime & foam beads buckets (2)",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Two Cra-Z-Art buckets: scented fluffy slime and scented foam beads, each with mix-ins.",
+      "photos": [
+        "scented-slime-foam-beads-buckets.png"
+      ]
+    },
+    {
+      "name": "Assorted mason jars with extra lids",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Seven glass jars (Ball/Kerr, assorted sizes/colors) plus a bag of extra metal lids and rings.",
+      "photos": [
+        "mason-jars-extra-lids-lot.png"
+      ]
+    },
+    {
+      "name": "Drinkware lot (mugs, bottles & shaker)",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "One lot: Co-op Cycles bottle, camo metal bottle, tandem + speckled enamel mugs, Starbucks mug, white + pink ceramic mugs, and stainless cocktail shaker.",
+      "photos": [
+        "drinkware-mugs-bottles-shaker-lot.png"
+      ]
+    },
+    {
+      "name": "Craft storage organizers (lazy susan & bins)",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "White 2-tier lazy susan, mint divided turntable tray, and light blue semi-circular storage bins.",
+      "photos": [
+        "craft-organizers-lazy-susan-and-bins.png",
+        "white-2-tier-lazy-susan.png",
+        "white-2-tier-lazy-susan-side.png",
+        "mint-green-divided-craft-tray.png",
+        "light-blue-craft-storage-bins.png"
+      ]
+    },
+    {
+      "name": "Tissue paper & craft supplies box",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Cardboard box with 100-sheet tissue paper pack (15\"×20\"), plus assorted craft paper and glue.",
+      "photos": [
+        "tissue-paper-craft-supplies-box.png"
+      ]
+    },
+    {
+      "name": "WoolBuddy ECO Colors Blending Kit",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Needle-felting color-mixing kit — learn to blend wool roving colors. No plastic in kit.",
+      "photos": [
+        "woolbuddy-eco-colors-blending-kit.png"
+      ]
+    },
+    {
+      "name": "Tiger Tribe Paper Dolls Kit (Vintage)",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Portable vintage paper doll set in decorative box. Ages 6+.",
+      "photos": [
+        "tiger-tribe-paper-dolls-vintage-box.png"
+      ]
+    },
+    {
+      "name": "Paper doll craft kit (green case)",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Fold-out case with paper dolls, double-ended colored pencils, and outfit sketchbook.",
+      "photos": [
+        "paper-doll-craft-kit-green-case.png"
+      ]
+    },
+    {
+      "name": "Bearpaw archery finger tab",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Leather finger tab with packaging and instructions. New/unused.",
+      "photos": [
+        "bearpaw-archery-finger-tab.png",
+        "bearpaw-archery-finger-tab-packaging.png"
+      ]
+    },
+    {
+      "name": "Rain ponchos & emergency blankets",
+      "cat": "Crafts",
+      "location": "resident",
+      "price": 0,
+      "note": "Airpler adult rain poncho 4-pack plus two Global mylar emergency blankets (52\"×84\").",
+      "photos": [
+        "rain-ponchos-emergency-blankets.png"
+      ]
+    },
+    {
+      "name": "KitchenAid 2-slice toaster",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Brushed stainless KitchenAid toaster. Used — some smudges on exterior.",
+      "photos": [
+        "kitchenaid-2-slice-toaster.png",
+        "kitchen-appliances-group-toaster-airpot-blender.png"
+      ]
+    },
+    {
+      "name": "Stainless steel thermal airpot",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Pump-action coffee/tea airpot with black lid and carrying handle.",
+      "photos": [
+        "stainless-steel-airpot-front.png",
+        "stainless-steel-airpot-top.png",
+        "kitchen-appliances-group-toaster-airpot-blender.png"
+      ]
+    },
+    {
+      "name": "Ninja Professional 1000W blender",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Ninja Professional base with 72-oz pitcher and stacked blade assembly. Used.",
+      "photos": [
+        "ninja-professional-blender-1000w.png",
+        "ninja-professional-blender-lid.png",
+        "kitchen-appliances-group-toaster-airpot-blender.png"
+      ]
+    },
+    {
+      "name": "Nutri Slicer XL",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Manual press chopper — slice, shred, dice. Includes box and blade inserts.",
+      "photos": [
+        "nutri-slicer-xl-box.png",
+        "nutri-slicer-xl-unit.png"
+      ]
+    },
+    {
+      "name": "HAY Sowden electric kettle",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Dusty rose kettle with blue base (~1L). Stainless interior marked HAY / SUS 304.",
+      "photos": [
+        "hay-sowden-electric-kettle.png",
+        "hay-sowden-electric-kettle-open.png",
+        "hay-sowden-electric-kettle-interior.png"
+      ]
+    },
+    {
+      "name": "Sea Waffles animal waffle maker",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Teal round waffle maker with dolphin, seahorse, and crab molds.",
+      "photos": [
+        "sea-waffles-waffle-maker-closed.png",
+        "sea-waffles-waffle-maker-open.png"
+      ]
+    },
+    {
+      "name": "Instant Pot Duo Gourmet",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Multi-use pressure cooker with getting-started guide. Good condition.",
+      "photos": [
+        "instant-pot-duo-gourmet.png"
+      ]
+    },
+    {
+      "name": "Zojirushi Neuro Fuzzy rice cooker (NS-ZCC10)",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Made in Japan. 5.5-cup fuzzy-logic rice cooker with inner pot and lid.",
+      "photos": [
+        "zojirushi-neuro-fuzzy-rice-cooker-closed.png",
+        "zojirushi-neuro-fuzzy-rice-cooker-open.png"
+      ]
+    },
+    {
+      "name": "Patterned ceramic jar with cork lid",
       "cat": "Decor",
+      "location": "resident",
+      "price": null,
+      "note": "White cylinder with black floral pattern, red interior glaze, and cork lid.",
+      "photos": [
+        "patterned-ceramic-jar-cork-lid-top.png",
+        "patterned-ceramic-jar-cork-lid-side.png"
+      ]
+    },
+    {
+      "name": "Cadrim RGB puck lights (6-pack)",
+      "cat": "Electronics",
+      "location": "resident",
+      "price": null,
+      "note": "Remote-controlled dimmable LED puck lights with warm white and color modes. Box + remotes.",
+      "photos": [
+        "cadrim-rgb-puck-lights-box.png",
+        "cadrim-rgb-puck-lights-contents.png"
+      ]
+    },
+    {
+      "name": "Nexgrill grilling tools set",
+      "cat": "Outdoor",
+      "location": "resident",
+      "price": null,
+      "note": "Fork, slotted spatula, and tongs with wooden handles.",
+      "photos": [
+        "nexgrill-grilling-tools-set.png"
+      ]
+    },
+    {
+      "name": "Brondell EcoSeat S101 bidet seat",
+      "cat": "Decor",
+      "location": "resident",
+      "price": null,
+      "note": "Non-electric bidet toilet seat. Self-cleaning retractable nozzles, adjustable pressure.",
+      "photos": [
+        "brondell-ecoseat-s101-box.png"
+      ]
+    },
+    {
+      "name": "Curtains (54\"×84\" white)",
+      "cat": "Sold",
       "location": "storage",
       "price": 10,
       "note": "Target Threshold Farrah. Light filtering, rod pocket. 8 available. $10 each.",
@@ -611,7 +1214,8 @@
         "white-farrah-curtains-windows-tied-sofa-room.jpg",
         "white-farrah-curtains-sheer-three-panels-glow.jpg",
         "white-farrah-curtains-folded-stack.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Floor lamps",
@@ -773,19 +1377,33 @@
     },
     {
       "name": "Large IKEA mirror",
-      "cat": "Decor",
+      "cat": "Sold",
       "location": "storage",
       "price": 20,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "morning",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "note": "Mirror, white, 25⅝ × 59 in.",
       "photos": [
         "large-white-wall-mirror-25x59.png"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Black mirror with stand",
-      "cat": "Decor",
+      "cat": "Sold",
       "location": "resident",
       "price": 10,
+      "sold": true,
+      "pickupClaim": {
+        "date": "2026-05-30",
+        "time": "1pm",
+        "dayFormat": "long",
+        "includeDate": false
+      },
       "photos": [
         "black-slim-full-length-floor-mirror.jpg"
       ]
@@ -892,29 +1510,28 @@
     },
     {
       "name": "Black tower fan",
-      "cat": "Outdoor",
+      "cat": "Sold",
       "location": "resident",
       "price": 45,
       "photos": [
         "black-vornado-tower-fan-bedroom-full.png",
         "black-vornado-tower-fan-top-controls.png"
       ],
-      "reserved": true,
-      "reserveMessage": "Reserved — on hold for the standing fan."
+      "sold": true
     },
     {
       "name": "Leaf blower",
-      "cat": "Outdoor",
+      "cat": "Sold",
       "location": "resident",
       "price": 185,
-      "reserved": true,
       "note": "EGO Power+ cordless; 615 CFM brushless; 56V ARC Lithium battery + charger included.",
       "photos": [
         "ego-leaf-blower-brushless-615-cfm.png",
         "ego-leaf-blower-power-plus-kit.png",
         "ego-56v-battery-on-charger.png",
         "ego-battery-charger-dock.png"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Camping portable table",
@@ -1078,19 +1695,21 @@
     },
     {
       "name": "Makai soprano ukulele (pink stickers)",
-      "cat": "Kids",
+      "cat": "Sold",
       "location": "resident",
       "price": 30,
       "photos": [
         "makai-soprano-ukulele-pink-stickers.jpg"
-      ]
+      ],
+      "sold": true
     },
     {
       "name": "Galaxy Penny skateboard",
-      "cat": "Outdoor",
+      "cat": "Sold",
       "location": "resident",
       "note": "Like new",
       "price": 20,
+      "sold": true,
       "photos": [
         "galaxy-penny-skateboard-side-view-1.jpg",
         "galaxy-penny-skateboard-top-view-1.jpg",
@@ -1099,13 +1718,13 @@
     },
     {
       "name": "Fire extinguisher",
-      "cat": "Outdoor",
+      "cat": "Sold",
       "location": "resident",
       "price": 20,
-      "reserved": true,
       "photos": [
         "kidde-fire-extinguisher.jpg"
-      ]
+      ],
+      "sold": true
     }
   ]
 }

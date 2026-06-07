@@ -18,8 +18,16 @@ there — no JSX changes needed. Category order and labels are in the
 `categories` array in the same file.
 
 Optional per item: `"location": "storage"` or `"location": "resident"` (shown on
-the card and included when someone copies or texts their list). Omit the field if
+the card and included when someone copies their list into email). Omit the field if
 pickup location does not matter for that item.
+
+**Pickup claimed** — when someone has scheduled pickup, add `"pickupClaim"` (shown
+as a blue badge on the card):
+
+- String: `"SAT 5/30 @ 1pm"` (used as-is), or
+- Object: `{ "date": "2026-05-30", "time": "1pm" }` → `SAT 5/30 @ 1pm` (default)
+- With a window: `{ "date": "2026-05-30", "time": "1–3pm", "dayFormat": "long", "includeDate": false }` → `SATURDAY @ 1–3pm`
+- Optional: `"timeEnd": "3pm"` with `"time": "1"` → `SAT 5/30 @ 1–3pm`
 
 ## Items without photos (hidden for now)
 
