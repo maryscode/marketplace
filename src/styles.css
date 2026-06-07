@@ -20,6 +20,11 @@
   --radius-sm: 6px;
 }
 
+html {
+  background: var(--bg);
+  transition: background-color 0.35s ease;
+}
+
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
@@ -27,6 +32,7 @@ body {
   font-size: 15px;
   line-height: 1.6;
   min-height: 100vh;
+  transition: background-color 0.35s ease;
 }
 
 a { color: var(--teal-text); text-decoration: none; }
@@ -200,7 +206,7 @@ a:hover { text-decoration: underline; }
 
 .item-card:hover { border-color: var(--muted); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 .item-card.is-claimed { border-color: #1a6b3c; background: var(--green-bg); }
-.item-card.is-reserved { opacity: 0.6; }
+.item-card.is-sold { opacity: 0.6; }
 .item-card.has-photo,
 .item-card.has-photo-placeholder {
   overflow: hidden;
@@ -439,6 +445,20 @@ a:hover { text-decoration: underline; }
 .badge-purple { background: var(--purple-bg); color: var(--purple-text); }
 .badge-teal { background: var(--teal-bg); color: var(--teal-text); }
 
+.item-photo-filenames {
+  margin: 0;
+  padding: 6px 0 0 1.1em;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--muted);
+  list-style: disc;
+}
+
+.item-photo-filenames li {
+  word-break: break-all;
+}
+
 .item-note {
   font-size: 12px;
   color: var(--muted);
@@ -468,17 +488,6 @@ a:hover { text-decoration: underline; }
 
 .claim-btn:hover { background: var(--surface2); color: var(--text); }
 .claim-btn.active { background: #1a6b3c; color: #ffffff; border-color: #1a6b3c; }
-
-.reserved-msg {
-  margin: 0;
-  padding: 0.55rem 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.35;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface2);
-}
 
 .empty-state {
   text-align: center;

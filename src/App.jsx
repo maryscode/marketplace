@@ -12,38 +12,31 @@ function photoSrc(filename) {
   return `${IMG_BASE}/${filename}`;
 }
 
+function photoBasename(file) {
+  if (!file) return "";
+  const path = String(file).replace(/\\/g, "/");
+  return path.split("/").pop() || path;
+}
+
 /**
  * When true, items without photos[0] never appear in the grid (see README /
  * .cursor/notes.md). Set false to show placeholder cards again.
  */
 const OMIT_ITEMS_WITHOUT_FEATURED_PHOTO = true;
 
-const LOCATION_LABELS = {
-  storage: "Storage",
-  resident: "Residence",
-};
-
-function locationLabel(item) {
-  const loc = item.location;
-  if (!loc) return null;
-  return LOCATION_LABELS[loc] ?? loc;
-}
-
-function locationBadgeClass(location) {
-  if (location === "storage") return "badge-gray";
-  if (location === "resident") return "badge-teal";
-  return "badge-gray";
-}
+/** Dev-only: show image filenames on cards. Set false before deploying. */
+const SHOW_PHOTO_FILENAMES = false;
 
 const FILTERS = [
   { value: "available", label: "All available" },
+  { value: "Crafts", label: "Crafts" },
   { value: "Furniture", label: "Furniture" },
   { value: "Storage", label: "Storage" },
   { value: "Electronics", label: "Electronics" },
   { value: "Kids", label: "Kids" },
   { value: "Decor", label: "Decor" },
   { value: "Outdoor", label: "Outdoor" },
-  { value: "reserved", label: "Reserved" },
+  { value: "Sold", label: "Sold" },
 ];
 
 /** Matches ItemCard: featured slot only when photos[0] is truthy */
@@ -53,7 +46,7 @@ function itemHasFeaturedPhoto(item) {
 }
 
 function priceBadge(item) {
-  if (item.reserved) return { text: "Reserved", cls: "badge-purple" };
+  if (item.sold) return { text: "Sold", cls: "badge-purple" };
   if (item.price == null) return { text: "TBD", cls: "badge-amber" };
   if (item.price === 0) return { text: "Free", cls: "badge-green" };
   return { text: "$" + item.price, cls: "badge-green" };
@@ -65,8 +58,8 @@ function priceText(item) {
   return "$" + item.price;
 }
 
-/** Shorter, numbered list — best for SMS prefilled body */
-function buildSmsBody(claimedItems) {
+/** Numbered list copied into email */
+function buildClaimListBody(claimedItems) {
   const lines = claimedItems.map((i, n) => {
     return `${n + 1}. ${i.name} (${priceText(i)})`;
   });
@@ -77,24 +70,6 @@ function buildSmsBody(claimedItems) {
     "",
     "Let me know about pickup. Thanks!",
   ].join("\n");
-}
-
-/**
- * Prefilled SMS bodies are inconsistent across OS/browser.
- * - iOS expects sms:&body=… (ampersand before body when there is no recipient).
- * - Others use sms:?body=…
- * - iPadOS Safari often reports as Macintosh + touch — treat as iOS-style.
- */
-function smsHrefForBody(plainBody) {
-  const body = encodeURIComponent(plainBody);
-  const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
-  const platform = typeof navigator !== "undefined" ? navigator.platform : "";
-  const touches = typeof navigator !== "undefined" ? (navigator.maxTouchPoints ?? 0) : 0;
-  const isIOSStyleSms =
-    /iPad|iPhone|iPod/i.test(ua) ||
-    (platform === "MacIntel" && touches > 1); // iPadOS 13+ “desktop” UA
-
-  return isIOSStyleSms ? `sms:&body=${body}` : `sms:?body=${body}`;
 }
 
 export default function App() {
@@ -111,11 +86,13 @@ export default function App() {
   };
 
   const visibleSections = useMemo(() => {
-    const reservedOnly = activeFilter === "reserved";
+    const soldOnly = activeFilter === "Sold";
     const cats =
-      activeFilter === "available" || activeFilter === "reserved"
-        ? categories
-        : categories.filter((c) => c.key === activeFilter);
+      activeFilter === "available"
+        ? categories.filter((c) => c.key !== "Sold")
+        : soldOnly
+          ? categories.filter((c) => c.key === "Sold")
+          : categories.filter((c) => c.key === activeFilter);
 
     return cats
       .map(({ key, label }) => {
@@ -125,8 +102,8 @@ export default function App() {
         if (OMIT_ITEMS_WITHOUT_FEATURED_PHOTO) {
           catItems = catItems.filter((i) => itemHasFeaturedPhoto(i));
         }
-        if (reservedOnly) catItems = catItems.filter((i) => i.reserved);
-        else catItems = catItems.filter((i) => !i.reserved);
+        if (soldOnly) catItems = catItems.filter((i) => i.sold);
+        else catItems = catItems.filter((i) => !i.sold);
         return { key, label, items: catItems };
       })
       .filter((s) => s.items.length > 0);
@@ -221,8 +198,7 @@ function SendBar({ claimed, onClear }) {
 
   if (claimedItems.length === 0) return null;
 
-  const body = buildSmsBody(claimedItems);
-  const sms = smsHrefForBody(body);
+  const body = buildClaimListBody(claimedItems);
 
   const onCopyList = () => {
     copyTextToClipboard(body)
@@ -236,7 +212,7 @@ function SendBar({ claimed, onClear }) {
           setCopied(true);
           window.setTimeout(() => setCopied(false), 2000);
         } catch {
-          window.alert("Could not copy — try Text list instead.");
+          window.alert("Could not copy — please select and copy the list manually.");
         }
       });
   };
@@ -255,18 +231,15 @@ function SendBar({ claimed, onClear }) {
         <div className="sendbar-actions">
           <button
             type="button"
-            className={`send-btn send-btn-secondary${copied ? " is-copied" : ""}`}
+            className={`send-btn send-btn-primary${copied ? " is-copied" : ""}`}
             onClick={onCopyList}
           >
             {copied ? "Copied!" : "Copy list"}
           </button>
-          <a className="send-btn send-btn-primary" href={sms}>
-            Text list
-          </a>
         </div>
         <p className="sendbar-hint">
-          Nothing is held until you message me. Everything on your list goes in one text — copy and
-          paste, or use Text list.
+          Nothing is held until you email/text me. Tap <strong>"Copy list"</strong>, open a new text/email to me,
+          and paste into the message.
         </p>
       </div>
     </div>
@@ -277,10 +250,10 @@ function Hero() {
   return (
     <div className="hero">
       <p className="hero-eyebrow">Summer 2026</p>
-      <h1>Moving furniture sale</h1>
+      <h1>Moving sale</h1>
       <p className="hero-body">
-        Tap <strong>Add to my list</strong> on anything you want to request. When you’re ready, use{" "}
-        <strong>Copy list</strong> and paste into your text to me. 
+        Tap <strong>Add to my list</strong> on anything you want to request. When you’re ready, tap{" "}
+        <strong>Copy list</strong> and paste into an email or text to me.
       </p>
     </div>
   );
@@ -327,14 +300,13 @@ function Section({ label, items, claimed, onClaim }) {
 
 function ItemCard({ item, isClaimed, onClaim }) {
   const { text, cls } = priceBadge(item);
-  const loc = locationLabel(item);
   const photos = Array.isArray(item.photos) ? item.photos : [];
   const hasFeaturedPhoto = itemHasFeaturedPhoto(item);
   const classes = [
     "item-card",
     hasFeaturedPhoto ? "has-photo" : "has-photo-placeholder",
     isClaimed ? "is-claimed" : "",
-    item.reserved ? "is-reserved" : "",
+    item.sold ? "is-sold" : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -348,12 +320,16 @@ function ItemCard({ item, isClaimed, onClaim }) {
           No photo
         </div>
       )}
+      {SHOW_PHOTO_FILENAMES && photos.length > 0 && (
+        <ul className="item-photo-filenames" aria-hidden="true">
+          {photos.map((file) => (
+            <li key={file}>{photoBasename(file)}</li>
+          ))}
+        </ul>
+      )}
       <div className="item-top">
         <span className="item-name">{item.name}</span>
         <div className="item-top-badges">
-          {/* {loc && (
-            <span className={`badge ${locationBadgeClass(item.location)}`}>{loc}</span>
-          )} */}
           <span className={`badge ${cls}`}>{text}</span>
         </div>
       </div>
@@ -363,7 +339,7 @@ function ItemCard({ item, isClaimed, onClaim }) {
           View original listing ↗
         </a>
       )}
-      {!item.reserved && (
+      {!item.sold && (
         <button
           type="button"
           className={`claim-btn${isClaimed ? " active" : ""}`}
@@ -372,11 +348,6 @@ function ItemCard({ item, isClaimed, onClaim }) {
         >
           {isClaimed ? "✓ On my list" : "Add to my list"}
         </button>
-      )}
-      {item.reserved && item.reserveMessage && (
-        <p className="reserved-msg" role="status">
-          {item.reserveMessage}
-        </p>
       )}
     </div>
   );
